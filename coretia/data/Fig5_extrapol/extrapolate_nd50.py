@@ -59,7 +59,7 @@ def init_data(nd50_titer = 2**6, hill_slope=1, cv=0.1, n_repeats=3):
 def nd50_mean_CI_converge(out_path=None, true_ND50=2**6, n_comparisons = 20, seed=np.random.seed(41), dpi=plot_dpi):
     from scipy.stats import ttest_rel
     # Run the MCMC model
-    from coretia.nl_model import hill_fit_cached as hill_fit_mcmc
+    from coretia.nl_model import hill_fit_cached
     from coretia.bayesian import extrapolate_mcmc
     alpha=0.3
 
@@ -82,7 +82,7 @@ def nd50_mean_CI_converge(out_path=None, true_ND50=2**6, n_comparisons = 20, see
         for nr in range(n_comparisons):
             cols = np.random.choice(n_repeats_large, n_repeats, replace=False)
             noisy_curve = noisy_broad_curve[matching_indices][:, cols]
-            trace = hill_fit_mcmc(dilutions_narrow, noisy_curve, use_weights=False)
+            trace = hill_fit_cached(dilutions_narrow, noisy_curve, use_weights=False)
             mlh = extrapolate_mcmc(trace, 0.5)[:3]
             nd50_mlh_all[str(n_repeats)].append(mlh)
 

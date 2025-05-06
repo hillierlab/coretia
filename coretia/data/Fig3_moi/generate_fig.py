@@ -1,7 +1,7 @@
 from pathlib import Path
 from coretia.data import merge_panels_into_word, merge_row_images_into_word, script_out_paths
 
-script_dir, out_path, pngname = script_out_paths(Path(__file__))
+script_dir, out_path, imgname = script_out_paths(Path(__file__), ext='jpg')
 
 caption_docx = script_dir/"caption.docx"
 
@@ -22,4 +22,5 @@ png_r1_c1 = merge_row_images_into_word(panels, out_path, out_path/f'row2c1.png',
 
 panels = [[str(png_r0)], [str(png_r1_c0)], [str(png_r1_c1)]]
 # Skip first panel (which is a row with 3 panels already merged and lettered above)
-merge_panels_into_word(panels, out_path, pngname, caption_docx, subpanel_label_skip=1, subpanel_label_start='D', scale_in_word=0.9)
+merge_panels_into_word(panels, out_path, imgname, caption_docx, subpanel_label_skip=1, subpanel_label_start='D',
+                       scale_in_word=0.9, keep_img=True)

@@ -105,7 +105,7 @@ def darken_color(color, factor=0.7):
     return darkened_color
 
 
-def plot_all(df, out_path, d_c, plot_kw=None, category_pair=None, plates=None, nd50_reference = None):
+def plot_all(df, out_path, d_c, plot_kw=None, category_pair=None, plates=None, nd50_reference = None, dpi=plot_dpi):
     from coretia.datahandling import normalize
     from coretia.bootstrap import nd50_barplot_mcmc, linear_bootstrap
     from coretia.process import feasible_pairs, replace_nd50_key_xlsname
@@ -155,7 +155,7 @@ def plot_all(df, out_path, d_c, plot_kw=None, category_pair=None, plates=None, n
             if bpath is not None:
                 if nd50_reference is not None:
                     bpath = bpath.with_stem(bpath.stem + "ref_adj")
-                fix.savefig(bpath.with_suffix('.png'), dpi=plot_kw.get('dpi', 300))
+                fix.savefig(bpath.with_suffix('.png'), dpi=plot_kw.get('dpi', dpi))
                 plt.close('all')
         except Exception as e:
             print(e)
@@ -196,7 +196,7 @@ def correct_nd50(df, nd50_reference, nd50_x):
 
 
 def plot_curves(df, d_c, out_path, plot_kw=None, category_pair=None, avg_f=np.mean, nd50_linear_bootstrapped = None,
-                include_ab_free=None):
+                include_ab_free=None, dpi=plot_dpi):
     from coretia.bootstrap import annotate_nd50_curve, sort_df_samples
 
     plot_kw = plot_kw or {}
@@ -345,7 +345,7 @@ def plot_curves(df, d_c, out_path, plot_kw=None, category_pair=None, avg_f=np.me
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     if out_path is not None:
-        plt.savefig(out_path.with_suffix('.png'), dpi=plot_kw.get('dpi', 300))
+        plt.savefig(out_path.with_suffix('.png'), dpi=plot_kw.get('dpi', plot_dpi))
         plt.close('all')
 
 
@@ -565,7 +565,7 @@ def read_caption_from_docx(caption_docx):
     return doc, caption_text
 
 
-def figure_as_word(out_path, caption_docx=None, scale=1.0, row_paths=None, keep_png=False, para_spacing=1, ext='png'):
+def figure_as_word(out_path, caption_docx=None, scale=1.0, row_paths=None, keep_img=False, para_spacing=1, ext='png'):
     cp_doc, cp = None, None
     if caption_docx is not None:
         cp_doc, cp = read_caption_from_docx(caption_docx)
@@ -600,11 +600,11 @@ def figure_as_word(out_path, caption_docx=None, scale=1.0, row_paths=None, keep_
         for rp1, wi1, s1 in zip(row_paths, wi_scaled, scale):
             doc.add_picture(str(rp1), width=Inches(wi1) * s1)
             doc.add_paragraph("\n")  # Add some space between rows
-            if not keep_png:
+            if not keep_img:
                 os.remove(rp1)  # delete temp png files
     else:
         doc.add_picture(str(out_path.with_suffix(f'.{ext}')), width=Inches(page_width_in_inches * scale))
-        if not keep_png:
+        if not keep_img:
             os.remove(out_path.with_suffix(f'.{ext}'))
 
     # Add the caption text with formatting

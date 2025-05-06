@@ -9,6 +9,7 @@ import scipy.stats as stats
 from collections import defaultdict
 from pathlib import Path
 
+from coretia.plot import plot_dpi
 compare_pairs = \
     [('sample', (datapath/'other/adk9_moi1000_20240810.toml', datapath/'firefly/adk9_moi1000_20240810.toml'), 0),
      ('moi', (datapath/'other/adk9_moi1000_20240810.toml', datapath/'other/adk9_moi100_20240810.toml'), 0)
@@ -136,7 +137,7 @@ def parse_nd50_db(file_path, use_species = 'all', ignore_keywords = None, verbos
     return dict(all_ci_data), paired_data, out_path, species_count
 
 
-def plot_fixed_bin_histograms(all_ci_data, out_path, species_count, medians):
+def plot_fixed_bin_histograms(all_ci_data, out_path, species_count, medians, dpi=plot_dpi):
     """Plot histograms using ALL samples."""
     from coretia.data.Fig2_MCMC.basic_comparing_neutralization_levels import colors_nd50_methods
 
@@ -193,7 +194,7 @@ def plot_fixed_bin_histograms(all_ci_data, out_path, species_count, medians):
     if out_path is None:
         plt.show()
     else:
-        fig.savefig((out_path / 'boostrap-hill_histogram').with_suffix('.png'), dpi=300)
+        fig.savefig((out_path / 'boostrap-hill_histogram').with_suffix('.png'), dpi=dpi)
 
 
 def analyze_paired_samples(paired_data):

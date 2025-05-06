@@ -21,8 +21,6 @@ uv run python process.py recursive C:\\Users\\measurement\\PycharmProjects\\core
 out_base = None
 import traceback
 from pathlib import Path
-from coretia.datahandling import d_c_from_meta
-import shelve
 import numpy as np
 import matplotlib.pyplot as plt
 import tomllib
@@ -351,7 +349,7 @@ def plot_mcmc_fits(x1, d_c, comparer, curves, colors, plot_kw, out_path=None):
     if out_path is not None:
         fix.tight_layout()
         op1 = plot.generate_output_name(out_path, "loghillplots", plot_kw)
-        fix.savefig(op1.with_suffix('.png'), dpi=plot_kw.get('dpi',300))
+        fix.savefig(op1.with_suffix('.png'), dpi=plot_kw.get('dpi',plot.plot_dpi))
     else:
         plt.show()
     plt.close()
@@ -367,7 +365,7 @@ def plot_nd50_barplot_mcmc(subjects, nd50_data, nd50_samples, d_c, colors, lines
 
     if out_path is not None:
         op1 = plot.generate_output_name(out_path, "barplot", plot_kw)
-        fix.savefig(op1.with_suffix('.png'), dpi=plot_kw.get('dpi',300))
+        fix.savefig(op1.with_suffix('.png'), dpi=plot_kw.get('dpi',plot.plot_dpi))
     else:
         plt.show(block=True)
     plt.close()

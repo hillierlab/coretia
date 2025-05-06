@@ -207,8 +207,8 @@ def draw_panel_element(img, width, x_offset, y_offset, total_width, total_height
                 label_idx[0] += 1
 
 
-def merge_panels_into_word(panels, script_dir, pngname, caption_docx, scale_in_word=1, scale_factors=None,
-        return_png=False, subpanel_label_start='A', subpanel_label_skip=0):
+def merge_panels_into_word(panels, script_dir, imgname, caption_docx, scale_in_word=1, scale_factors=None,
+        return_png=False, subpanel_label_start='A', subpanel_label_skip=0, keep_img=False, ext='png'):
 
     """
     Create a composite figure from a nested panels structure and export to Word.
@@ -295,10 +295,10 @@ def merge_panels_into_word(panels, script_dir, pngname, caption_docx, scale_in_w
 
     # Save the image
     plt.subplots_adjust(wspace=0, hspace=0)
-    plt.savefig(pngname, bbox_inches='tight', pad_inches=0, dpi=dpi)
+    plt.savefig(imgname, bbox_inches='tight', pad_inches=0, dpi=dpi)
     if return_png:
-        return pngname
-    figure_as_word(pngname, caption_docx, scale=scale_in_word)
+        return imgname
+    figure_as_word(imgname, caption_docx, scale=scale_in_word, keep_img=keep_img, ext=ext)
 
 
 def resolve_image_path(img, script_dir):
@@ -310,8 +310,8 @@ def resolve_image_path(img, script_dir):
         return script_dir / 'output' / img
 
 
-def merge_row_images_into_word(panels, script_dir, pngname, caption_docx=None, scale_in_word=1.0,
-                               return_png=False, subpanel_label_start = 'A', ext='png', keep_png=False):
+def merge_row_images_into_word(panels, script_dir, imgname, caption_docx=None, scale_in_word=1.0,
+                               return_png=False, subpanel_label_start = 'A', ext='png', keep_img=False):
     """
     Stitch images horizontally and vertically using Matplotlib and add labels with fig.text.
     """
@@ -410,7 +410,7 @@ def merge_row_images_into_word(panels, script_dir, pngname, caption_docx=None, s
             current_x_px += img_width_px
 
     # --- Save figure ---
-    output_path = pngname # Use the final pngname directly
+    output_path = imgname # Use the final imgname directly
 
     plt.subplots_adjust(left=0, right=1, top=1, bottom=0, wspace=0, hspace=0)
     plt.savefig(output_path, dpi=dpi, bbox_inches='tight', pad_inches=0)
@@ -421,7 +421,7 @@ def merge_row_images_into_word(panels, script_dir, pngname, caption_docx=None, s
     else:
         # Extract the scale value if it's a list (use the first value for the whole figure)
         final_scale = scale_in_word[0] if isinstance(scale_in_word, list) else scale_in_word
-        figure_as_word(output_path, caption_docx, scale=final_scale, ext=ext, keep_png=keep_png)
+        figure_as_word(output_path, caption_docx, scale=final_scale, ext=ext, keep_img=keep_img)
         # os.remove(output_path) # Optional: remove the png after embedding in Word
 
 
@@ -528,14 +528,14 @@ def script_out_paths(script_path, ext='png'):
     from coretia import remap_output_path
     if hasattr(coretia.process, 'out_base'):
         out_path = remap_output_path(script_dir / 'output', coretia.process.out_base)
-        pngname = out_path.parent / f'{script_dir.name}.{ext}'
+        imgname = out_path.parent / f'{script_dir.name}.{ext}'
     else:
         out_path = script_dir / 'output'
-        pngname = out_path.parent / 'output' / f'{script_dir.name}.{ext}'
+        imgname = out_path.parent / 'output' / f'{script_dir.name}.{ext}'
 
     out_path.mkdir(parents=True, exist_ok=True)
 
-    return script_dir, out_path, pngname
+    return script_dir, out_path, imgname
 
 
 def nested_apply(obj, func):
