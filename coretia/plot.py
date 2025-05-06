@@ -6,7 +6,41 @@ from PIL import Image
 import matplotlib.legend as mlegend
 legend_locations = list(mlegend.Legend.codes.keys())
 
-plot_dpi = 300
+plot_dpi = 600
+
+def setup_fonts():
+    import sys
+    import os
+    plt.rcParams['font.family'] = 'Times New Roman'
+    import matplotlib.font_manager as fm
+
+    # Select Times New Roman font based on platform
+    if sys.platform == 'win32':
+        font_paths = [r'C:\Windows\Fonts\Times.ttf']
+    elif sys.platform == 'darwin':
+        font_paths = [
+            '/Library/Fonts/Times New Roman.ttf',
+            '/System/Library/Fonts/Supplemental/Times New Roman.ttf'
+        ]
+    else:
+        # Assume Linux; try some common paths
+        font_paths = [
+            '/usr/share/fonts/truetype/msttcorefonts/Times_New_Roman.ttf',
+            '/usr/share/fonts/truetype/freefont/FreeSerif.ttf'
+        ]
+    font_path = next((p for p in font_paths if os.path.exists(p)), None)
+
+    if font_path is None:
+        raise RuntimeError("Times New Roman font not found on this system.")
+
+    # Create FontProperties using the selected font path
+    font_prop = fm.FontProperties(fname=font_path)
+
+    # Update default Matplotlib font family if needed
+    plt.rcParams['font.family'] = font_prop.get_name()
+    return font_prop
+font_prop = setup_fonts()
+
 
 def get_colors_for_curves(n_curves, categories, plates, plot_kw, color_key = 'nd50_colors'):
     colors = plot_kw.get('figures', {}).get(color_key, [])
@@ -389,12 +423,14 @@ def title_within_axes(text, ax=None, **kwargs):
     """
     if ax is None:
         ax = plt.gca()
-    text1 = text.encode('utf-8').decode('unicode_escape')
+    #text1 = text.encode('utf-8').decode('unicode_escape')
+    text1 = text
     ax.text(
         0.5, kwargs.get("title_y", 0.98), text1,
         transform=ax.transAxes,  # Position relative to the axes (normalized 0 to 1)
         ha=kwargs.get("ha", "center"), va=kwargs.get("va", "bottom"),  # Center horizontally and align bottom
-        fontsize=kwargs.get("fontsize", 12)  # Adjust as needed
+        fontsize=kwargs.get("fontsize", 12),
+        fontproperties=kwargs.get("font_prop", font_prop)
     )
 
 

@@ -2,7 +2,7 @@ from pathlib import Path
 from coretia.data import merge_row_images_into_word, script_out_paths
 from coretia.data.Fig2_MCMC import basic_comparing_neutralization_levels
 from coretia import assay_quality
-script_dir, out_path, pngname = script_out_paths(Path(__file__))
+script_dir, out_path, pngname = script_out_paths(Path(__file__), ext='jpg')
 
 assay_quality.ci_cv_figure(script_dir/'nd50_ci_cv_method_paper')  # shelve does not need the extension, adds '.db' itself
 basic_comparing_neutralization_levels.adk9_demo(toml_path=script_dir / 'adk9.toml', out_path=out_path, nd50_thr_log=0)

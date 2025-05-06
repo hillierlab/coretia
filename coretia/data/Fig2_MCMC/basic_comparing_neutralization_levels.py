@@ -13,7 +13,7 @@ from coretia.bootstrap import (visualize_mcmc_fit, nd50_barplot_mcmc, bootstrap_
 from coretia.bayesian import extrapolate_mcmc, linear_nd50_slope_in_log2_space_estimates, \
     hill_curve
 from coretia.nl_model import hill_fit_cached as hill_fit_mcmc
-from coretia.plot import create_custom_legend, linear_bootstrap_zoomed, title_within_axes, plot_dpi
+from coretia.plot import create_custom_legend, linear_bootstrap_zoomed, title_within_axes, plot_dpi, font_prop
 from pathlib import Path
 import multiprocessing
 import platform
