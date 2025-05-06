@@ -1,0 +1,29 @@
+[meta]
+path = '../../plate_data/mouse_day1.xlsx'
+
+[expt]
+cell_number = '1x10^5 cell/well'
+
+moi = 100
+capsid = 'AAV9'
+plate = 'Plate 1'
+incubation_time = '24 h'
+
+#serum dilution
+[block.3x1]
+A4.dilution = 64
+B4.dilution = 128
+C4.dilution = 256
+D4.dilution = 512
+E4.dilution = 1024
+F4.dilution = 2048
+G4.dilution = 4096
+
+H1.dilution = 1
+H1.no_antibody_control = 1  # no-antibody control
+H4.negative_control = 1  # no virus, no serum, only cells
+
+#sample
+[block.3x7]
+A4.sample = 'Mouse'
+

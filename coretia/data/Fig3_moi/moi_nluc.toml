@@ -1,0 +1,18 @@
+title = ''
+xlabel = 'MOI'
+ylabel = 'Transduction Efficiency (%)'
+basic_stats.groupby = ['sample', 'moi']
+normalize.groupby = ['sample']
+plot.groupby = ['sample']
+normalize.ingroup_query = "moi==1"
+plot.xscale = 'log'
+plot.yscale = 'log'
+figures.allcurveslegend=['best']
+figures.allfigsize = [3.4, 4]
+figures.allcurvescolors = ['#BF5688', '#FCDE9C', '#7CCBA2']
+figures.allcurvesraw_ylim = [70, 5e6]
+
+[meta.concat]
+'AAV1-NLuc' = './sample_toml/moi_aav1.toml'
+'AAV5-NLuc' = './sample_toml/moi_aav5.toml'
+'AAV9-NLuc' = './sample_toml/moi_aav9.toml'

@@ -1,0 +1,24 @@
+[meta]
+path = '../../plate_data/moi_aav1_aav9.xlsx'
+
+[expt]
+cell_number = '1x10^5 cell/well'
+
+#moi = 'variable'
+capsid = 'AAV9'
+plate = 'Plate 3'
+incubation_time = '48 h'
+sample = 'no sample'
+
+dilution = 1
+
+[block.3x1]
+A4.no_antibody_control = 1
+A4.moi = 1
+
+B4.moi = 10
+C4.moi = 100
+D4.moi = 1000
+E4.moi = 10000
+
+H4.negative_control = 1  # no virus, no serum, only cells

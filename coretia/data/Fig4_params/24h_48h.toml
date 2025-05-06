@@ -1,0 +1,23 @@
+title = ''#''Positvive human sample against AAV9 24h and 48h after transduction'
+xlabel = 'Serum Dilution'
+ylabel = 'Transduction Efficiency (%)'
+basic_stats.groupby = ['sample', 'dilution']
+normalize.groupby = ['sample']
+plot.groupby = ['sample']
+plot.categories = ['24 h', '48 h']
+figures.barplot_category_minor_xticks = 1
+figures.allcurvescolors = ['#089099', '#F0746E']
+figures.nd50_colors = ['#089099', '#F0746E']
+figures.nd50_labels	= ['Human']
+figures.barplotsize = [2,6]
+figures.barplot_text_gap = 0.17
+figures.barplot_toffset = 0.022
+figures.label_rotation = 0
+figures.barplotylim = 24
+figures.major_labels_show = 0
+figures.barplot_minor_vertical_pad = 5
+nd50_thr_log = 0.3  # Hill MCMC CI statistics
+
+[meta.concat]
+'human5 24 h' = './sample_toml/24h_human5.toml'
+'human5 48 h' = './sample_toml/48h_human5.toml'

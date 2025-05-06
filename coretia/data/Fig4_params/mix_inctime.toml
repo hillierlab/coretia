@@ -1,0 +1,25 @@
+title = ''#Positvive human sample against AAV9 with different tranduction mix incubation time'
+xlabel = 'Serum Dilution'
+ylabel = 'Transduction Efficiency (%)'
+basic_stats.groupby = ['sample', 'dilution']
+nd50_thr_log = 0.3  # Hill MCMC CI statistics
+normalize.groupby = ['sample']
+plot.groupby = ['sample']
+figures.mcmc_nd50_pair_with_next = 1
+figures.nd50_labels = ['15','30','60 min']
+figures.nd50_labels_override=1
+figures.barplotylim = 20
+figures.barplot_text_gap = 0.14
+figures.barplot_toffset = 0.016
+figures.allcurvescolors = ['#089099', '#F0746E', '#7C1D6F']
+figures.mcmc_curvescolors = ['#089099', '#F0746E', '#7C1D6F']
+figures.nd50_colors = ['#089099', '#F0746E', '#7C1D6F']
+figures.major_fontsize = 8
+figures.label_rotation = 0
+figures.hill_error_style = ['hill_CI95_bars']
+figures.barplotsize = [2.5,6]
+
+[meta.concat]
+'15' = './sample_toml/15m_human5.toml'
+'30' = './sample_toml/30m_human5.toml'
+'60 min' = './sample_toml/1h_human5.toml'

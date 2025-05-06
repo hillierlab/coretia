@@ -1,0 +1,28 @@
+[meta]
+path = '../../plate_data/24h.xlsx'
+
+[expt]
+cell_number = '1x10^5 cell/well'
+
+moi = 100
+capsid = 'AAV9'
+plate = 'Plate 1'
+incubation_time = '24 h'
+
+#serum dilution
+[block.3x1]
+A1.dilution = 4
+B1.dilution = 8
+C1.dilution = 16
+D1.dilution = 32
+E1.dilution = 64
+F1.dilution = 128
+G1.dilution = 256
+
+H1.no_antibody_control = 1  # antibody-free control
+H1.dilution = 1
+H4.negative_control = 1  # no virus, no serum, only cells
+
+#sample
+[block.3x7]
+A1.sample = 'human5'

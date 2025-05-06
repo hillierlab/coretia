@@ -1,0 +1,27 @@
+[meta]
+path = '../../plate_data/moi_aav5_human.xlsx'
+
+[expt]
+cell_number = '1x10^5 cell/well'
+
+moi = 1000
+capsid = 'AAV5'
+plate = 'Plate 4'
+incubation_time = '24 h'
+
+#serum dilution
+[block.2x1]
+A5.dilution = 4
+B5.dilution = 8
+C5.dilution = 16
+D5.dilution = 32
+E5.dilution = 64
+F5.dilution = 128
+
+G5.no_antibody_control = 1  # antibody-free control
+G5.dilution = 1
+H1.negative_control = 1  # no virus, no serum, only cells
+
+#sample
+[block.2x6]
+A5.sample = 'human2'

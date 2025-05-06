@@ -1,0 +1,29 @@
+title = 'AAV1'
+xlabel = 'Serum Dilution'
+ylabel = 'Transduction Efficiency (%)'
+basic_stats.groupby = ['sample', 'dilution']
+normalize.groupby = ['sample']
+plot.groupby = ['sample']
+nd50_estimator = 'Hill-MCMC'
+nd50_thr_log = 0.3
+figures.allcurveslegend = ['best', 'title']
+figures.allcurvescolors = ['#089099', '#F0746E', '#7C1D6F']
+figures.hill_error_style = ['hill_CI95_bars']
+figures.barplotsize = [3.6, 5]  # extra width for y axis
+figures.barplotylim = 38
+figures.mcmc_nd50_all_combinations = 1
+figures.mcmc_curvesaxis = ['yaxis']
+figures.barplot_yaxis = 1
+figures.barplot_text_gap = 0.17
+figures.barplot_toffset = 0.022
+figures.mcmc_curves_figsize = [3.6, 4]  # # extra width for y axis
+figures.nd50_colors = ['#089099', '#F0746E', '#7C1D6F']
+figures.mcmc_barplot_significance_positions= 'max'
+
+
+[meta.concat]
+'MOI10' = './sample_toml/moi10_aav1_human1.toml'
+'MOI100' = './sample_toml/moi100_aav1_human1.toml'
+'MOI1000' = './sample_toml/moi1000_aav1_human1.toml'
+
+

@@ -1,0 +1,24 @@
+title = ''#''Effect of serum heat-inactivation'
+xlabel = 'Serum Dilution'
+ylabel = 'Transduction Efficiency (%)'
+basic_stats.groupby = ['sample', 'dilution']
+normalize.groupby = ['sample']
+plot.groupby = ['sample']
+plot.categories = ['Untreated', 'Heat-inactivated']
+figures.nd50_labels = ['Human']
+figures.nd50_colors = ['#089099', '#F0746E']
+figures.mcmc_barplot_significance = 'star'
+figures.barplot_category_minor_xticks = 1
+figures.barplotylim = 16
+figures.minor_label_rotation = 0
+figures.minor_labels = ['Untreated', 'Heat-\ninactivated']
+figures.major_labels_show = 0
+figures.label_rotation = 0
+figures.barplot_text_gap = 0.17
+figures.barplot_toffset = 0.022
+figures.barplotsize = [2,6]
+nd50_thr_log = 0.3  # Hill MCMC CI statistics
+
+[meta.concat]
+'human4 Untreated' = './sample_toml/untreated_human4.toml'
+'human4 Heat-inactivated' = './sample_toml/heatinactivated_human4.toml'

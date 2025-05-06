@@ -1,0 +1,25 @@
+title = ''
+xlabel = 'Serum Dilution'
+ylabel = 'Transduction Efficiency (%)'
+basic_stats.groupby = ['sample', 'dilution']
+normalize.groupby = ['sample']
+plot.groupby = ['sample']
+nd50_thr_log = -1  # Hill MCMC CI statistics display actual differences in ND50
+figures.hill_error_style = ['hill_CI95_bars']
+figures.mcmc_curves_figsize = [4, 6]
+figures.mcmc_nd50_all_combinations = 1
+figures.nd50_labels	= ['D1', 'D2', 'D3']
+figures.barplotsize = [2,6]
+figures.label_rotation = 0
+figures.barplotylim = 20000
+figures.major_labels_show = 1
+figures.barplot_minor_vertical_pad = 5
+figures.minor_labels = ['D1', 'D2', 'D3']
+figures.barplot_text_gap = 0.17
+figures.barplot_toffset = 0.022
+figures.barplot_vertical_gap = 0.3  # space between brackets
+
+[meta.concat]
+'D1' = './sample_toml/mouse_day1.toml'
+'D2' = './sample_toml/mouse_day2.toml'
+'D3' = './sample_toml/mouse_day3.toml'

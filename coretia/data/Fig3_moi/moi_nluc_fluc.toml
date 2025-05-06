@@ -1,0 +1,15 @@
+title = 'NLuc vs. FLuc'
+xlabel = 'MOI'
+ylabel = 'Transduction Efficiency (%)'
+basic_stats.groupby = ['sample', 'moi']
+plot.groupby = ['sample']
+plot.xscale = 'log'
+plot.yscale = 'log'
+figures.allcurveslegend=['best']
+figures.allcurvesraw_ylim = [70, 5e6]
+figures.allfigsize = [3.8, 4]
+figures.allcurvescolors = ['#7CCBA2', '#B5745A']
+
+[meta.concat]
+'AAV9-NLuc' = './sample_toml/moi_aav9.toml'
+'AAV9-FLuc' = './sample_toml/moi_fluc.toml'
