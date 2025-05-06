@@ -311,7 +311,7 @@ def resolve_image_path(img, script_dir):
 
 
 def merge_row_images_into_word(panels, script_dir, pngname, caption_docx=None, scale_in_word=1.0,
-                               return_png=False, subpanel_label_start = 'A'):
+                               return_png=False, subpanel_label_start = 'A', ext='png', keep_png=False):
     """
     Stitch images horizontally and vertically using Matplotlib and add labels with fig.text.
     """
@@ -421,7 +421,7 @@ def merge_row_images_into_word(panels, script_dir, pngname, caption_docx=None, s
     else:
         # Extract the scale value if it's a list (use the first value for the whole figure)
         final_scale = scale_in_word[0] if isinstance(scale_in_word, list) else scale_in_word
-        figure_as_word(output_path, caption_docx, scale=final_scale)
+        figure_as_word(output_path, caption_docx, scale=final_scale, ext=ext, keep_png=keep_png)
         # os.remove(output_path) # Optional: remove the png after embedding in Word
 
 
@@ -522,16 +522,16 @@ def crop_to_match_width(images):
     return cropped_images
 
 
-def script_out_paths(script_path):
+def script_out_paths(script_path, ext='png'):
     import coretia.process
     script_dir = script_path.resolve().parent
     from coretia import remap_output_path
     if hasattr(coretia.process, 'out_base'):
         out_path = remap_output_path(script_dir / 'output', coretia.process.out_base)
-        pngname = out_path.parent / f'{script_dir.name}.png'
+        pngname = out_path.parent / f'{script_dir.name}.{ext}'
     else:
         out_path = script_dir / 'output'
-        pngname = out_path.parent / 'output' / f'{script_dir.name}.png'
+        pngname = out_path.parent / 'output' / f'{script_dir.name}.{ext}'
 
     out_path.mkdir(parents=True, exist_ok=True)
 

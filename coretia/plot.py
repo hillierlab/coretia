@@ -529,7 +529,7 @@ def read_caption_from_docx(caption_docx):
     return doc, caption_text
 
 
-def figure_as_word(out_path, caption_docx=None, scale=1.0, row_paths=None, keep_png=False, para_spacing=1):
+def figure_as_word(out_path, caption_docx=None, scale=1.0, row_paths=None, keep_png=False, para_spacing=1, ext='png'):
     cp_doc, cp = None, None
     if caption_docx is not None:
         cp_doc, cp = read_caption_from_docx(caption_docx)
@@ -567,9 +567,9 @@ def figure_as_word(out_path, caption_docx=None, scale=1.0, row_paths=None, keep_
             if not keep_png:
                 os.remove(rp1)  # delete temp png files
     else:
-        doc.add_picture(str(out_path.with_suffix('.png')), width=Inches(page_width_in_inches * scale))
+        doc.add_picture(str(out_path.with_suffix(f'.{ext}')), width=Inches(page_width_in_inches * scale))
         if not keep_png:
-            os.remove(out_path.with_suffix('.png'))
+            os.remove(out_path.with_suffix(f'.{ext}'))
 
     # Add the caption text with formatting
     if cp_doc:  # If a caption document is provided, copy formatting

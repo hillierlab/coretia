@@ -20,6 +20,11 @@ uv venv .venv
 source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
 ```
 
+The first time you set up the environment, you need to install packages used by coreTIA:
+```bash
+uv pip install .
+```
+
 ## Tutorials
 To get started with using CoreTIA, see the tutorials available in the [Tutorials](coretia/tutorials) directory.
 

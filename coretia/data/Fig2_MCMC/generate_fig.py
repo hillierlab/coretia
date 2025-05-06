@@ -27,5 +27,6 @@ panels = [
       ]
 ]
 
-merge_row_images_into_word(panels, out_path, pngname, cp, scale_in_word=[0.9, 0.9])
+merge_row_images_into_word(panels, out_path, pngname, cp, scale_in_word=[0.9, 0.9], ext='jpg', keep_png=True)
+
 
